@@ -17,9 +17,8 @@ int main()
 
     vdata.open(".//scripts/vectors.txt", std::ios_base::trunc);
     if (!vdata)
-        std::cout << "Error file" << std::endl;
 
-    vdata << NUM_STEPS - 1 << std::endl;
+        vdata << NUM_STEPS - 1 << std::endl;
     while (NUM_TESTS--)
     {
         buffer = mark_chain(NUM_STEPS, NUM_STATES, reformat_matrix(prob_matrix));
@@ -28,21 +27,18 @@ int main()
             result.at(i) += buffer.at(i);
         }
         buffer.clear();
-        std::cout << std::endl;
     }
     for (uint8_t i = 0; i < result.size(); i++)
         result.at(i) = result.at(i) / 1000.0;
+
     save_to_file(result);
 
     ro = ro_culc(prob_matrix, NUM_STEPS);
 
     vdata.close();
 
-    system("python3 .//scripts//plot.py");
-    //sleep(0.1);
-    system("eog -f .//graphics//state_p*.jpeg &> /dev/null");
-    std::getline(std::cin, ex);
-    if (!ex.compare("exit") || !ex.compare("q"))
-        std::exit(1);
+    system("python3 .//scripts//plot.py &>> /dev/null");
+    system("eog -f .//graphics//state_p*.jpeg &>> /dev/null");
+
     return 0;
 }
