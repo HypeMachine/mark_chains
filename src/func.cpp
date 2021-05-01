@@ -19,11 +19,9 @@ mark_chain(const int steps, const int states,
     double cur_prob = 0.0;
     std::vector<int> current_state(steps, 0);
     current_state[0] = 1; //int)(rand() % states);
-    sleep(2);
     for (uint8_t i = 1; i < steps; i++)
     {
         cur_prob = (1.0 * rand()) / RAND_MAX;
-        std::cout << cur_prob << std::endl;
         for (uint j = 0; j < axis_p_matrix.at(current_state.at(i - 1)).size(); j++)
         {
             if (cur_prob >= axis_p_matrix.at(current_state.at(i - 1)).at(j))
@@ -32,7 +30,6 @@ mark_chain(const int steps, const int states,
             }
         }
     }
-    std::cout << std::endl;
     //save_to_file(current_state);
     return current_state;
 }
